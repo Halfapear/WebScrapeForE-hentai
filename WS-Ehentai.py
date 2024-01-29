@@ -1,14 +1,16 @@
+#这是加过延时的版本，当然没有用，应该是要代理了
 import requests
 from bs4 import BeautifulSoup
 import os
 import re
+import time  # 导入time模块
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
 print("Sending GET request...")
-response = requests.get("https://e-hentai.org/g/2812665/5355b535a3/", headers=headers)
+response = requests.get("https://e-hentai.org/g/2812978/cc49236dbb/", headers=headers)
 
 if response.ok:
     print("GET request successful. Parsing HTML...")
@@ -34,6 +36,7 @@ if response.ok:
                             print(f"Found image URL: {image_url}")
                             # 发送一个请求到图片的url，下载图片
                             print("Downloading image...")
+                            time.sleep(5)  # 在下载图片之前暂停5秒
                             img_response = requests.get(image_url, stream=True, headers=headers)
                             if img_response.ok:
                                 # 打开一个新的文件，在二进制模式下写入
